@@ -29,9 +29,14 @@ def count_unique(input_string):
 
     """
 
+    # Splits string into a list of words
     words = input_string.split()
 
+    # Creates an empty dictionary
     unique_words = {}
+
+    # Adds each word to the dictionary with an initial count of 1
+    # If the word in already in the dictionary, it increments the count for each occurance of the word.
 
     for word in words:
 
@@ -40,6 +45,7 @@ def count_unique(input_string):
         else:
             unique_words[word] += 1
 
+    # Returns the entire dictionary of words and their counts, not just a list of the unique words
     return unique_words
 
 
@@ -70,7 +76,7 @@ def find_common_items(list1, list2):
 
     """
 
-    # Without dictionaries
+    # Without dictionaries, more straightforward
 
     # common_items =[]
 
@@ -82,12 +88,18 @@ def find_common_items(list1, list2):
     #
     # return common_items
 
-    # With dictionaries
+    ## With dictionaries, more complex
 
+    # Cretes new empty dictionary to hold the common items
     common_items = {}
 
+    # Loops through each item in list1
     for i in range(len(list1)):
         item_in_list1 = list1[i]
+
+        # Then loops through each item in list2 to find a match
+        # When found the item from list1 is added to the dictionary as a key
+        # and the match from list2 is added to a list of values for that key.
         for item_in_list2 in list2:
             if item_in_list1 == item_in_list2:
                 if common_items.get(item_in_list1, 0) == 0:
@@ -95,9 +107,11 @@ def find_common_items(list1, list2):
                 else: 
                     common_items[item_in_list1].append(item_in_list2)
 
+    # Creates a list of the values, since this function needs to return a list of common items 
     lists = common_items.values()
-    common_items_list = []
 
+    # Since the values are also lists, they need to be combined into one list rather than a list of lists.
+    common_items_list = []
     for lst in lists:
         common_items_list += lst
 
