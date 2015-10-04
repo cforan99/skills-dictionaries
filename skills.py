@@ -118,30 +118,72 @@ def find_common_items(list1, list2):
     return common_items_list
 
 
-# def find_unique_common_items(list1, list2):
-#     """Produce the set of *unique* common items in two lists.
+def find_unique_common_items(list1, list2):
+    """Produce the set of *unique* common items in two lists.
 
-#     Given two lists, return a list of the *unique* common items shared between
-#     the lists.
+    Given two lists, return a list of the *unique* common items shared between
+    the lists.
 
-#     IMPORTANT: you may not not 'if ___ in ___' or the method 'index'.
+    IMPORTANT: you may not not 'if ___ in ___' or the method 'index'.
 
 
-#     Just like `find_common_items`, this should find [1, 2]:
+    Just like `find_common_items`, this should find [1, 2]:
 
-#         >>> sorted(find_unique_common_items([1, 2, 3, 4], [1, 2]))
-#         [1, 2]
+        >>> sorted(find_unique_common_items([1, 2, 3, 4], [1, 2]))
+        [1, 2]
 
-#     However, now we only want unique items, so for these lists, don't show
-#     more than 1 or 2 once:
+    However, now we only want unique items, so for these lists, don't show
+    more than 1 or 2 once:
 
-#         >>> sorted(find_unique_common_items([1, 2, 3, 4], [1, 1, 2, 2]))
-#         [1, 2]
+        >>> sorted(find_unique_common_items([1, 2, 3, 4], [1, 1, 2, 2]))
+        [1, 2]
 
-#     """
+    """
+    # # Without dictionaries, much more concise
 
-#     return []
+    # # Converts lists to sets
+    # set1 = set(list1)
+    # set2 = set(list2)
 
+    # # Finds the intersection of the two sets and stores it as a list of unique common items
+    # unique_list = list(set1.intersection(set2))
+
+    # return unique_list
+
+    ## With dictionaries, much more complex
+    # Similar to the find_common_items function
+
+    unique_common_items = {}
+
+    for i in range(len(list1)):
+        item_in_list1 = list1[i]
+
+        # Then loops through each item in list2 to find a match
+        # When found the item from list1 is added to the dictionary as a key
+        # and the match from list2 is added to a SET of values for that key.
+        for item_in_list2 in list2:
+            if item_in_list1 == item_in_list2:
+                if unique_common_items.get(item_in_list1, 0) == 0:
+                    unique_common_items[item_in_list1] = {item_in_list2}
+                else: 
+                    unique_common_items[item_in_list1].add(item_in_list2)
+                    # Cannot append to set so the add method is used instead
+                    # Sets will not repeat duplicate values
+
+    # Creates a list of the values, since this function needs to return a list of common items 
+    values = unique_common_items.values()
+
+    # Since the values are sets, they need to be combined into one set rather than a list of sets.
+    # Empty set is created and each value set is merged in using the union method.
+    unique_common_items_set = set()
+    for value in values:
+        unique_common_items_set = unique_common_items_set.union(value)
+
+    # Converts set to list since this function must return a list
+    unique_common_items = list(unique_common_items_set)
+
+    return unique_common_items
+    
 
 # def get_sum_zero_pairs(input_list):
 #     """Given a list of numbers, return list of x,y number pair lists where x + y == 0.
