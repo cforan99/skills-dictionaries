@@ -1,5 +1,5 @@
 # To work on the advanced problems, set to True
-ADVANCED = False
+ADVANCED = True
 
 
 def count_unique(input_string):
@@ -443,27 +443,50 @@ def get_pirate_talk(phrase):
 # ############################################################################
 
 
-# def adv_get_top_letter(input_string):
-#     """Given an input string, return a list of letter(s) which appear(s) the most the input string.
+def adv_get_top_letter(input_string):
+    """Given an input string, return a list of letter(s) which appear(s) the most the input string.
 
-#     If there is a tie, the order of the letters in the returned
-#     list should be alphabetical.
+    If there is a tie, the order of the letters in the returned
+    list should be alphabetical.
 
-#     For example:
-#         >>> adv_get_top_letter("The rain in spain stays mainly in the plain.")
-#         ['i', 'n']
+    For example:
+        >>> adv_get_top_letter("The rain in spain stays mainly in the plain.")
+        ['i', 'n']
 
-#     If there is not a tie, simply return a list with one item.
+    If there is not a tie, simply return a list with one item.
 
-#     For example:
-#         >>> adv_get_top_letter("Shake it off, shake it off. Shake it off, Shake it off.")
-#         ['f']
+    For example:
+        >>> adv_get_top_letter("Shake it off, shake it off. Shake it off, Shake it off.")
+        ['f']
 
-#     Spaces do not count as letters.
+    Spaces do not count as letters.
 
-#     """
+    """
 
-#     return ''
+    letter_counts = {}
+
+    # Adds each letter to the dictionary with an initial count of 1
+    # If the letter is already in the dictionary, it increments the count by 1.
+
+    for letter in input_string:
+        if letter == " ":
+            pass
+        elif letter_counts.get(letter, 0) == 0:
+            letter_counts[letter] = 1
+        else:
+            letter_counts[letter] += 1
+
+    # Finds the highest count and adds that letter or letters to the popular_letters list.
+    popular_letters = []
+    max_counts = max(letter_counts.values())
+    for letter in letter_counts:
+        if letter_counts[letter] == max_counts:
+            popular_letters.append(letter)
+
+    # Sorts into alphabetical order
+    popular_letters = sorted(popular_letters)
+
+    return popular_letters
 
 
 # def adv_alpha_sort_by_word_length(words):
