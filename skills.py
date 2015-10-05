@@ -284,19 +284,34 @@ def remove_duplicates(words):
     return unique_words_list
 
 
-# def encode(phrase):
-#     """Given a phrase, return the encoded string.
+def encode(phrase):
+    """Given a phrase, return the encoded string.
 
-#     Replace all "e" characters with "p",
-#     replace "a" characters with "d", replace "t" characters with "o",
-#     and "i" characters with "u".
+    Replace all "e" characters with "p",
+    replace "a" characters with "d", replace "t" characters with "o",
+    and "i" characters with "u".
 
-#     For example:
+    For example:
 
-#         >>> encode("You are a beautiful, talented, brilliant, powerful musk ox.")
-#         'You drp d bpduouful, odlpnopd, brulludno, powprful musk ox.'
-#     """
-#     return ''
+        >>> encode("You are a beautiful, talented, brilliant, powerful musk ox.")
+        'You drp d bpduouful, odlpnopd, brulludno, powprful musk ox.'
+    """
+
+    encoded_phrase = ""
+
+    for char in phrase:
+        if char == "e":
+            encoded_phrase += "p"
+        elif char == "a":
+            encoded_phrase += "d"
+        elif char == "t":
+            encoded_phrase += "o"
+        elif char == "i":
+            encoded_phrase += "u"
+        else:
+            encoded_phrase += char
+
+    return encoded_phrase
 
 
 # def sort_by_word_length(words):
