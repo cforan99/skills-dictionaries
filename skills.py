@@ -334,6 +334,8 @@ def sort_by_word_length(words):
 
     word_lengths = {}
 
+    # Calculate the length of each word and add it to the dictionary with length as the key and the word as a list for the value.
+    # Each time a word of the same length is found, add that word to the list of values.
     for word in words:
         length = len(word)
         if word_lengths.get(length, 0) == 0:
@@ -345,8 +347,8 @@ def sort_by_word_length(words):
 
     word_lengths_list = []
 
+    # Search dictionary for word lengths in ascending order from 1 to the max word length and add the key-value pair as a tuple to the list.
     lengths = word_lengths.keys()
-
     for i in range(1, max(lengths)+1):
         for length in word_lengths:
             if length == i:
@@ -355,50 +357,86 @@ def sort_by_word_length(words):
     return word_lengths_list
 
 
-# def get_pirate_talk(phrase):
-#     """Translate phrase to pirate talk.
+def get_pirate_talk(phrase):
+    """Translate phrase to pirate talk.
 
-#     Given a phrase, translate each word to the Pirate-speak equivalent.
-#     Words that cannot be translated into Pirate-speak should pass through
-#     unchanged. Return the resulting sentence.
+    Given a phrase, translate each word to the Pirate-speak equivalent.
+    Words that cannot be translated into Pirate-speak should pass through
+    unchanged. Return the resulting sentence.
 
-#     Here's a table of English to Pirate translations:
+    Here's a table of English to Pirate translations:
 
-#     English     Pirate
-#     ----------  ----------------
-#     sir         matey
-#     hotel       fleabag inn
-#     student     swabbie
-#     boy         matey
-#     madam       proud beauty
-#     professor   foul blaggart
-#     restaurant  galley
-#     your        yer
-#     excuse      arr
-#     students    swabbies
-#     are         be
-#     lawyer      foul blaggart
-#     the         th'
-#     restroom    head
-#     my          me
-#     hello       avast
-#     is          be
-#     man         matey
+    English     Pirate
+    ----------  ----------------
+    sir         matey
+    hotel       fleabag inn
+    student     swabbie
+    boy         matey
+    madam       proud beauty
+    professor   foul blaggart
+    restaurant  galley
+    your        yer
+    excuse      arr
+    students    swabbies
+    are         be
+    lawyer      foul blaggart
+    the         th'
+    restroom    head
+    my          me
+    hello       avast
+    is          be
+    man         matey
 
-#     For example:
+    For example:
 
-#         >>> get_pirate_talk("my student is not a man")
-#         'me swabbie be not a matey'
+        >>> get_pirate_talk("my student is not a man")
+        'me swabbie be not a matey'
 
-#     You should treat words with punctuation as if they were different
-#     words:
+    You should treat words with punctuation as if they were different
+    words:
 
-#         >>> get_pirate_talk("my student is not a man!")
-#         'me swabbie be not a man!'
+        >>> get_pirate_talk("my student is not a man!")
+        'me swabbie be not a man!'
 
-#     """
+    """
 
-#     return ""
+    # Create dictionary of English and Pirate words
+    english_to_pirate = {
+                            "sir": "matey",
+                            "hotel": "fleabag inn",
+                            "student": "swabbie",
+                            "boy": "matey",
+                            "madam": "proud beauty",
+                            "professor": "foul blaggart",
+                            "restaurant": "galley",
+                            "your": "yer",
+                            "excuse": "arr",
+                            "students": "swabbies",
+                            "are": "be",
+                            "lawyer": "foul blaggart",
+                            "the": "th'",
+                            "restroom": "head",
+                            "my": "me",
+                            "hello": "avast",
+                            "is": "be",
+                            "man": "matey",
+                        }
+
+    pirate_words = []
+
+    english_words = phrase.split()
+
+    # Search each word in phrase for an entry in the dictionary and swap it for the pirate word, if possible.
+    # Otherwise, just add the English word.
+    for word in english_words:
+        if word in english_to_pirate:
+            pirate_words.append(english_to_pirate[word])
+        else:
+            pirate_words.append(word)
+
+    pirate_phrase = " ".join(pirate_words)
+
+    return pirate_phrase
 
 # # End of skills. See below for advanced problems.
 # # To work on them, set ADVANCED=True at the top of this file.
