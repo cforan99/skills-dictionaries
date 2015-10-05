@@ -183,38 +183,68 @@ def find_unique_common_items(list1, list2):
     unique_common_items = list(unique_common_items_set)
 
     return unique_common_items
-    
-
-# def get_sum_zero_pairs(input_list):
-#     """Given a list of numbers, return list of x,y number pair lists where x + y == 0.
-
-#     Given a list of numbers, add up each individual pair of numbers.
-#     Return a list of each pair of numbers that adds up to 0.
 
 
-#     For example:
+def get_sum_zero_pairs(input_list):
+    """Given a list of numbers, return list of x,y number pair lists where x + y == 0.
 
-#         >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1]) )
-#         [[-2, 2], [-1, 1]]
+    Given a list of numbers, add up each individual pair of numbers.
+    Return a list of each pair of numbers that adds up to 0.
 
-#         >>> sort_pairs( get_sum_zero_pairs([3, -3, 2, 1, -2, -1]) )
-#         [[-3, 3], [-2, 2], [-1, 1]]
 
-#     This should always be a unique list, even if there are
-#     duplicates in the input list:
+    For example:
 
-#         >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1, 1, 1]) )
-#         [[-2, 2], [-1, 1]]
+        >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1]) )
+        [[-2, 2], [-1, 1]]
 
-#     Of course, if there are one or more zeros to pair together,
-#     that's fine, too (even a single zero can pair with itself):
+        >>> sort_pairs( get_sum_zero_pairs([3, -3, 2, 1, -2, -1]) )
+        [[-3, 3], [-2, 2], [-1, 1]]
 
-#         >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1, 1, 1, 0]) )
-#         [[-2, 2], [-1, 1], [0, 0]]
+    This should always be a unique list, even if there are
+    duplicates in the input list:
 
-#     """
+        >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1, 1, 1]) )
+        [[-2, 2], [-1, 1]]
 
-#     return []
+    Of course, if there are one or more zeros to pair together,
+    that's fine, too (even a single zero can pair with itself):
+
+        >>> sort_pairs( get_sum_zero_pairs([1, 2, 3, -2, -1, 1, 1, 0]) )
+        [[-2, 2], [-1, 1], [0, 0]]
+
+    """
+
+    ## Without dictionaries: INCOMPLETE, DO NOT UNCOMMENT
+
+    # pairs = []
+    # for number in input_list:
+    #     for i in range(len(input_list)):
+    #         if number + input_list[i] == 0:
+    #             sublist = [number, input_list[i]]
+    #             if sublist not in pairs:
+    #                 pairs.append(sublist)
+    # return pairs
+
+    ## With dictionaries
+
+    zero_pairs = {}
+
+    # Takes each negative number in the list and loops through the list to find its positive zero sum pair.
+    # If found, that negative number is added to the dictionary as a key, and the positive pair is added as a value.
+    # Since dictionaries can only have unique keys and one number can only have one zero pair, it is ok if keys and values get overwritten. 
+    for i in range(len(input_list)):
+        for number in input_list:
+            if (number >= 0) and (number + input_list[i] == 0):
+                zero_pairs[input_list[i]] = number
+
+    # Creates a list of zero sum pairs from the keys and values in the dictionary.
+    zero_pairs_list = []
+    for pair in zero_pairs:
+        zero_pairs_list.append([pair, zero_pairs[pair]])
+
+    return zero_pairs_list
+
+
 
 
 # def remove_duplicates(words):
