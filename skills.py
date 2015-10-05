@@ -489,23 +489,50 @@ def adv_get_top_letter(input_string):
     return popular_letters
 
 
-# def adv_alpha_sort_by_word_length(words):
-#     """Given a list of words, return a list of tuples, ordered by word-length.
+def adv_alpha_sort_by_word_length(words):
+    """Given a list of words, return a list of tuples, ordered by word-length.
 
-#     Each tuple should have two items--a number that is a word-length,
-#     and the list of words of that word length. In addition to ordering
-#     the list by word length, order each sub-list of words alphabetically.
-#     Now try doing it with only one call to .sort() or sorted(). What does the
-#     optional "key" argument for .sort() and sorted() do?
+    Each tuple should have two items--a number that is a word-length,
+    and the list of words of that word length. In addition to ordering
+    the list by word length, order each sub-list of words alphabetically.
+    Now try doing it with only one call to .sort() or sorted(). What does the
+    optional "key" argument for .sort() and sorted() do?
 
-#     For example:
+    For example:
 
-#         >>> adv_alpha_sort_by_word_length(["ok", "an", "apple", "a", "day"])
-#         [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
+        >>> adv_alpha_sort_by_word_length(["ok", "an", "apple", "a", "day"])
+        [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
 
-#     """
+    """
 
-#     return []
+    # Lines 509-529 are the same as lines 335-355 in the sort_by_word_length function.
+    word_lengths = {}
+
+    # Calculate the length of each word and add it to the dictionary with length as the key and the word as a list for the value.
+    # Each time a word of the same length is found, add that word to the list of values.
+    for word in words:
+        length = len(word)
+        if word_lengths.get(length, 0) == 0:
+            word_lengths[length] = [word]
+        else:
+            for i in range(len(word_lengths[length])):
+                if word != word_lengths[length][i]:
+                    word_lengths[length].append(word)
+
+    word_lengths_list = []
+
+    # Search dictionary for word lengths in ascending order from 1 to the max word length and add the key-value pair as a tuple to the list.
+    lengths = word_lengths.keys()
+    for i in range(1, max(lengths)+1):
+        for length in word_lengths:
+            if length == i:
+                word_lengths_list.append((length, word_lengths[length]))
+
+    # Iterates through each tuple and sorts the list of words in alphabetical order.
+    for j in range(len(word_lengths_list)-1):
+        word_lengths_list[j][1].sort()
+
+    return word_lengths_list
 
 
 ##############################################################################
