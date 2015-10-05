@@ -297,6 +297,8 @@ def encode(phrase):
         'You drp d bpduouful, odlpnopd, brulludno, powprful musk ox.'
     """
 
+    # Without dictionaries
+
     encoded_phrase = ""
 
     for char in phrase:
@@ -314,21 +316,43 @@ def encode(phrase):
     return encoded_phrase
 
 
-# def sort_by_word_length(words):
-#     """Given list of words, return list of ascending [(len, [words])].
+def sort_by_word_length(words):
+    """Given list of words, return list of ascending [(len, [words])].
 
-#     Given a list of words, return a list of tuples, ordered by word-length.
-#     Each tuple should have two items--the length of the words for that
-#     word-length, and the list of words of that word length.
+    Given a list of words, return a list of tuples, ordered by word-length.
+    Each tuple should have two items--the length of the words for that
+    word-length, and the list of words of that word length.
 
-#     For example:
+    For example:
 
-#         >>> sort_by_word_length(["ok", "an", "apple", "a", "day"])
-#         [(1, ['a']), (2, ['ok', 'an']), (3, ['day']), (5, ['apple'])]
+        >>> sort_by_word_length(["ok", "an", "apple", "a", "day"])
+        [(1, ['a']), (2, ['ok', 'an']), (3, ['day']), (5, ['apple'])]
 
-#     """
+    """
 
-#     return []
+    # With dictionaries
+
+    word_lengths = {}
+
+    for word in words:
+        length = len(word)
+        if word_lengths.get(length, 0) == 0:
+            word_lengths[length] = [word]
+        else:
+            for i in range(len(word_lengths[length])):
+                if word != word_lengths[length][i]:
+                    word_lengths[length].append(word)
+
+    word_lengths_list = []
+
+    lengths = word_lengths.keys()
+
+    for i in range(1, max(lengths)+1):
+        for length in word_lengths:
+            if length == i:
+                word_lengths_list.append((length, word_lengths[length]))
+
+    return word_lengths_list
 
 
 # def get_pirate_talk(phrase):
