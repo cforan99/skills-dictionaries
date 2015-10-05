@@ -33,20 +33,20 @@ def count_unique(input_string):
     words = input_string.split()
 
     # Creates an empty dictionary
-    unique_words = {}
+    word_counts = {}
 
     # Adds each word to the dictionary with an initial count of 1
     # If the word in already in the dictionary, it increments the count for each occurance of the word.
 
     for word in words:
 
-        if word not in unique_words:
-            unique_words[word] = 1
+        if word not in word_counts:
+            word_counts[word] = 1
         else:
-            unique_words[word] += 1
+            word_counts[word] += 1
 
     # Returns the entire dictionary of words and their counts, not just a list of the unique words
-    return unique_words
+    return word_counts
 
 
 def find_common_items(list1, list2):
@@ -247,26 +247,41 @@ def get_sum_zero_pairs(input_list):
 
 
 
-# def remove_duplicates(words):
-#     """Given a list of words, return the list with duplicates removed.
+def remove_duplicates(words):
+    """Given a list of words, return the list with duplicates removed.
 
-#     Do this without using a Python set.
+    Do this without using a Python set.
 
-#     For example:
+    For example:
 
-#         >>> sorted(remove_duplicates(
-#         ...     ["rose", "is", "a", "rose", "is", "a", "rose"]))
-#         ['a', 'is', 'rose']
+        >>> sorted(remove_duplicates(
+        ...     ["rose", "is", "a", "rose", "is", "a", "rose"]))
+        ['a', 'is', 'rose']
 
-#     You should treat differently-capitalized words as different:
+    You should treat differently-capitalized words as different:
 
-#         >>> sorted(remove_duplicates(
-#         ...     ["Rose", "is", "a", "rose", "is", "a", "rose"]))
-#         ['Rose', 'a', 'is', 'rose']
+        >>> sorted(remove_duplicates(
+        ...     ["Rose", "is", "a", "rose", "is", "a", "rose"]))
+        ['Rose', 'a', 'is', 'rose']
 
-#     """
+    """
 
-#     return []
+    # Very much like count_unique function
+
+    unique_words = {}
+
+    # Adds each word to the dictionary with an initial count of 1 only one time.
+    for word in words:
+
+        if unique_words.get(word, 0) == 0:
+            unique_words[word] = 1
+        else:
+            pass
+
+    # Create a list of words that only occur once from the dictionary
+    unique_words_list = unique_words.keys()
+
+    return unique_words_list
 
 
 # def encode(phrase):
